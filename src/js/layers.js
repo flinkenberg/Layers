@@ -7,24 +7,36 @@ if (Wraps.length == Layers.length) {
   for (var i = 0; i < Layers.length; i++) {
     for (var i = 0; i < Wraps.length; i++) {
       Wraps[i].style.height = Layers[i].scrollHeight+'px';
-      if (!Layers[i].style.background) {
-        Layers[i].style.background = 'white';
-      }
+      // if (!Layers[i].style.background) {
+      //   Layers[i].style.background = 'white';
+      // }
     }
   }
-
   var LayersScroll = function() {
     for (var i = 0; i < Layers.length; i++) {
       var initWdth = Layers[i].offsetWidth;
-      if (window.scrollY > Wraps[i].offsetTop) {
+      if (Wraps[i].scrollHeight > document.documentElement.clientHeight) {
+        if ((Wraps[i].offsetTop+Wraps[i].scrollHeight - window.scrollY) < document.documentElement.clientHeight) {
+          Layers[i].style.position = 'fixed';
+          Layers[i].style.bottom = '2px';
+          Layers[i].style.zIndex = -1;
+          Layers[i].style.width = initWdth+'px';
+        } else {
+          Layers[i].style.position = 'static';
+          Layers[i].style.bottom = 'auto';
+          Layers[i].style.zIndex = 'initial';
+        }
+      } else {
+        if (window.scrollY > Wraps[i].offsetTop) {
         Layers[i].style.position = 'fixed';
-        Layers[i].style.top = 0;
+        Layers[i].style.top = '-2px';
         Layers[i].style.zIndex = -1;
         Layers[i].style.width = initWdth+'px';
       } else {
         Layers[i].style.position = 'static';
         Layers[i].style.top = 'auto';
         Layers[i].style.zIndex = 'initial';
+      }
       }
     }
   }
