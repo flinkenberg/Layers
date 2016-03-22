@@ -22,7 +22,7 @@ body {
   line-height: 1.8em;
 }
 .container {
-  width: 997px;
+  max-width: 997px;
   margin: 0 auto;
   padding: 30px 15px 60px 15px;
 }
