@@ -1,48 +1,30 @@
 var Wraps = document.getElementsByClassName('layer');
 var Layers = document.getElementsByClassName('layer-content');
 
-if (Wraps.length == Layers.length) {
-
-  var layersHeight = 0;
+function LayersScroll() {
   for (var i = 0; i < Layers.length; i++) {
-    for (var i = 0; i < Wraps.length; i++) {
-      Wraps[i].style.height = Layers[i].scrollHeight+'px';
-      // if (!Layers[i].style.background) {
-      //   Layers[i].style.background = 'white';
-      // }
-    }
-  }
-  var LayersScroll = function() {
-    for (var i = 0; i < Layers.length; i++) {
-      var initWdth = Layers[i].offsetWidth;
-      if (Wraps[i].scrollHeight > document.documentElement.clientHeight) {
-        if ((Wraps[i].offsetTop+Wraps[i].scrollHeight - window.scrollY) < document.documentElement.clientHeight) {
-          Layers[i].style.position = 'fixed';
-          Layers[i].style.bottom = '2px';
-          Layers[i].style.zIndex = -1;
-          Layers[i].style.width = initWdth+'px';
-        } else {
-          Layers[i].style.position = 'static';
-          Layers[i].style.bottom = 'auto';
-          Layers[i].style.zIndex = 'initial';
-        }
+    if (Wraps[i].scrollHeight > document.documentElement.clientHeight) {
+      if ((Wraps[i].offsetTop+Wraps[i].scrollHeight - window.scrollY) < document.documentElement.clientHeight) {
+        !Wraps[i].className.match(/(?:^|\s)pinned(?!\S)/) ? Wraps[i].className += ' pinned' : null;
       } else {
-        if (window.scrollY > Wraps[i].offsetTop) {
-        Layers[i].style.position = 'fixed';
-        Layers[i].style.top = '-2px';
-        Layers[i].style.zIndex = -1;
-        Layers[i].style.width = initWdth+'px';
-      } else {
-        Layers[i].style.position = 'static';
-        Layers[i].style.top = 'auto';
-        Layers[i].style.zIndex = 'initial';
+        Wraps[i].className =  Wraps[i].className.replace(/(?:^|\s)pinned(?!\S)/g, '')
       }
+    } else {
+      if (window.scrollY > Wraps[i].offsetTop) {
+        !Wraps[i].className.match(/(?:^|\s)pinned(?!\S)/) ? Wraps[i].className += ' pinned' : null;
+      } else {
+        Wraps[i].className =  Wraps[i].className.replace(/(?:^|\s)pinned(?!\S)/g, '')
       }
     }
   }
-
-  document.addEventListener("scroll",LayersScroll);
-
-} else {
-  console.log('Not matching quantity of layer blocks and their containers');
 }
+
+for (var i = 0; i < Layers.length; i++) {
+  for (var i = 0; i < Wraps.length; i++) {
+    Wraps[i].style.height = Layers[i].scrollHeight+'px';
+    Wraps[i].style.width = Layers[i].offsetWidth+'px';
+  }
+}
+
+document.removeEventListener("scroll",LayersScroll);
+document.addEventListener("scroll",LayersScroll);

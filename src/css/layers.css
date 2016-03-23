@@ -14,7 +14,18 @@
 .layer-content:after {
   clear: both;
 }
-
+.layer > .layer-content {
+  opacity: 1;
+  position: static;
+  top: auto;
+  z-index: inherit;
+}
+.layer.pinned > .layer-content {
+  opacity: 1;
+  position: fixed;
+  top: 0;
+  z-index: -1;
+}
 /* Custom */
 
 body {
