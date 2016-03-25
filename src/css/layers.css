@@ -26,28 +26,29 @@
   position: fixed;
   top: 0;
   z-index: -1;
-  -webkit-filter: brightness(.75);
-  transition: 500ms;
+  filter: grayscale(100%) brightness(.85);
+  -webkit-filter: grayscale(100%) brightness(.85);
+  transition: 600ms;
 }
 .layer.pinnedBottom > .layer-content {
   opacity: 1;
   position: fixed;
   bottom: 0;
   z-index: -1;
-  -webkit-filter: brightness(.8);
-  transition: 500ms;
+  filter: grayscale(100%) brightness(.85);
+  -webkit-filter: grayscale(100%) brightness(.85);
+  transition: 600ms;
 }
 .layer.pinned >.layer-content > * {
   transform: scale(.97,.97);
   animation-name: zoom;
-
-  animation-duration: 500ms;
+  animation-duration: 600ms;
 
 }
 .layer.pinnedBottom >.layer-content > * {
   transform: scale(.97,.97);
   animation-name: zoom;
-  animation-duration: 500ms;
+  animation-duration: 600ms;
 }
 @keyframes zoom {
   0% {
@@ -64,31 +65,44 @@ body {
   line-height: 1.8em;
 }
 .container {
-  max-width: 997px;
+  max-width: 767px;
   margin: 0 auto;
   padding: 30px 15px 60px 15px;
 }
 header > * {
-  background: #439;
-  color: white;
+  font-size: .75em;
+  background: #111;
+  color: #e14;
+}
+section {
+  text-align: justify;
+}
+header h1 {
+  color: white
 }
 #first > *  {
   background: white;
-  color: black
+  color: #111
+}
+#first h2 {
+  color: #e14;
 }
 #second > *  {
-  background: #439;
+  background: #e14;
   color: white;
 }
 #third > *  {
-  background: black;
+  background: #111;
   color: white;
 }
 #fourth > * {
-  background: #439;
+  background: #e14;
   color: white;
 }
 #fifth > * {
   background: white;
-  color: black;
+  color: #111;
+}
+#fifth h2 {
+  color: #e14;
 }

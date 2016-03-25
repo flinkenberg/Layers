@@ -1,9 +1,14 @@
 var Wraps = document.getElementsByClassName('layer');
-var Layers = document.getElementsByClassName('layer-content');
+    Layers = document.getElementsByClassName('layer-content');
+    triggerPoint = -2;
+
+(function(){
+  LayersScroll();
+}());
 
 function LayersScroll() {
-  var triggerPoint = 1;
   for (var i = 0; i < Layers.length; i++) {
+    Wraps[i].style.height = Layers[i].scrollHeight+'px';
     if (Wraps[i].scrollHeight > document.documentElement.clientHeight) {
       if ((Wraps[i].offsetTop+Wraps[i].scrollHeight - window.scrollY) < document.documentElement.clientHeight) {
         !Wraps[i].className.match(/(?:^|\s)pinnedBottom(?!\S)/) ? Wraps[i].className += ' pinnedBottom' : null;
@@ -17,13 +22,6 @@ function LayersScroll() {
         Wraps[i].className =  Wraps[i].className.replace(/(?:^|\s)pinned(?!\S)/g, '')
       }
     }
-  }
-}
-
-for (var i = 0; i < Layers.length; i++) {
-  for (var i = 0; i < Wraps.length; i++) {
-    Wraps[i].style.height = Layers[i].scrollHeight+'px';
-    Wraps[i].style.width = Layers[i].offsetWidth+'px';
   }
 }
 
